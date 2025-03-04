@@ -84,11 +84,11 @@ public static class Config
                     UpdateAccessTokenClaimsOnRefresh = true,
                     RedirectUris =
                     {
-                        "https://localhost:7119/signin-oidc"
+                        "http://localhost:5047/signin-oidc"
                     },
                     PostLogoutRedirectUris =
                     {
-                        "https://localhost:7119/signout-callback-oidc"
+                        "http://localhost:5047/signout-callback-oidc"
                     },
                     AllowedScopes =
                     {

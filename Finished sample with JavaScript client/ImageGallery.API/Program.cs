@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       //});
       .AddOAuth2Introspection(options =>
       {
-          options.Authority = "https://localhost:5001";
+          options.Authority = "http://localhost:5001";
           options.ClientId = "imagegalleryapi";
           options.ClientSecret = "apisecret";
           options.NameClaimType = "given_name";
@@ -68,7 +68,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 

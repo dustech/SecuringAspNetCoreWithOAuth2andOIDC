@@ -17,7 +17,7 @@ builder.Services.AddBff()
 
 builder.Services.AddHttpClient("IDPClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5001/");
+    client.BaseAddress = new Uri("http://localhost:5001/");
 });
 
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(options =>
 .AddOpenIdConnect(bffChallengeScheme, options =>
 {
     options.SignInScheme = bffCookieScheme;
-    options.Authority = "https://localhost:5001/";
+    options.Authority = "http://localhost:5001/";
     options.ClientId = "imagegallerybff";
     options.ClientSecret = "anothersecret";
     options.ResponseType = "code"; 
@@ -44,6 +44,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("imagegalleryapi.write");
     options.Scope.Add("country");
     options.Scope.Add("offline_access");
+    options.RequireHttpsMetadata = false;
     options.ClaimActions.MapJsonKey("role", "role");
     options.ClaimActions.MapUniqueJsonKey("country", "country");
     options.TokenValidationParameters = new()
@@ -72,7 +73,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRemoteBffApiEndpoint(
-            "/bff/images", "https://localhost:7075/api/images")
+            "/bff/images", "http://localhost:5075/api/images")
         .RequireAccessToken(TokenType.User);
 
 app.MapControllerRoute(
