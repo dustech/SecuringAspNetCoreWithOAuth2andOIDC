@@ -104,6 +104,37 @@ public static class Config
                         new Secret("anothersecret".Sha256())
                     },
                     RequireConsent = true
+                },
+                new()
+                {
+                    ClientName = "Grind BFF",
+                    ClientId = "grindbff",                    
+                    AccessTokenType = AccessTokenType.Reference,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowOfflineAccess = true,                    
+                    UpdateAccessTokenClaimsOnRefresh = true,
+                    RedirectUris =
+                    {
+                        "http://localhost:4200/signin-oidc"
+                    },
+                    PostLogoutRedirectUris =
+                    {
+                        "http://localhost:4200/signout-callback-oidc"
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles", 
+                        "imagegalleryapi.read",
+                        "imagegalleryapi.write",
+                        "country"
+                    },
+                    ClientSecrets =
+                    {
+                        new Secret("anothersecret".Sha256())
+                    },
+                    RequireConsent = true
                 }
             ];
 }
